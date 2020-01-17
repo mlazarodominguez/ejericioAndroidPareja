@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="16dp"
-    tools:context=".VideoFragmentList">
+    android:layout_height="wrap_content"
+    android:layout_margin="32dp">
+
 
     <ImageView
         android:id="@+id/imageViewVideo"
@@ -31,7 +31,8 @@
         android:id="@+id/textViewTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hola muy buenas a todos aqui willy comentando"
+        android:layout_marginStart="8dp"
+        android:text="Hola muy buenas a todos aqui willy"
         app:layout_constraintStart_toEndOf="@+id/imageViewPerfil"
         app:layout_constraintTop_toTopOf="@+id/imageViewPerfil" />
 
@@ -41,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Willyrex"
-        app:layout_constraintStart_toEndOf="@+id/imageViewPerfil"
+        app:layout_constraintStart_toStartOf="@+id/textViewTitulo"
         app:layout_constraintTop_toBottomOf="@+id/textViewTitulo" />
 
     <TextView
