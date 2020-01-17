@@ -71,7 +71,7 @@ public class VideoFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyVideoRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            // recyclerView.setAdapter(new MyVideoRecyclerViewAdapter(DummyContent.ITEMS, mListener));
         }
         return view;
     }

@@ -2,9 +2,11 @@ package com.example.youtube_item_design;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.youtube_item_design.VideoFragment.OnListFragmentInteractionListener;
@@ -12,19 +14,18 @@ import com.example.youtube_item_design.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
+
 public class MyVideoRecyclerViewAdapter extends RecyclerView.Adapter<MyVideoRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
-    private final OnListFragmentInteractionListener mListener;
+    private final List<Video> mValues;
+    private Context ctx;
+    private int layout;
 
-    public MyVideoRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+
+    public MyVideoRecyclerViewAdapter(Context ctx, int layout, List<Video> items) {
+        this.ctx = ctx;
+        this.layout = layout;
         mValues = items;
-        mListener = listener;
     }
 
     @Override
@@ -37,19 +38,8 @@ public class MyVideoRecyclerViewAdapter extends RecyclerView.Adapter<MyVideoRecy
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
-                }
-            }
-        });
+
     }
 
     @Override
@@ -59,20 +49,24 @@ public class MyVideoRecyclerViewAdapter extends RecyclerView.Adapter<MyVideoRecy
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public DummyItem mItem;
+        public final ImageView ivVideo;
+        public final ImageView ivPerfil;
+        public final TextView tvTitulo;
+        public final TextView tvPerfil;
+        public final TextView tvVistas;
+        public Video mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
-        }
-
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            ivVideo = view.findViewById(R.id.imageViewVideo);
+            ivPerfil = view.findViewById(R.id.imageViewPerfil);
+            tvTitulo = view.findViewById(R.id.textViewTitulo);
+            tvPerfil = view.findViewById(R.id.textViewNombrePerfil);
+            tvVistas = view.findViewById(R.id.textViewVisitas);
         }
     }
 }
+
+
+
