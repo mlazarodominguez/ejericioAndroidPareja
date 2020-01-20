@@ -3,9 +3,8 @@ package com.example.amazon_item_design;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements IAmazonProductListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -13,4 +12,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    @Override
+    public void onRestauranteClick(Restaurante r) {
+
+    }
 }

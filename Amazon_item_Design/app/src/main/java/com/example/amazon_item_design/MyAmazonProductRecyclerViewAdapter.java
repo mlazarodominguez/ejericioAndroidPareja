@@ -2,6 +2,7 @@ package com.example.amazon_item_design;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,21 +11,20 @@ import android.widget.TextView;
 import com.example.amazon_item_design.AmazonProductFragment.OnListFragmentInteractionListener;
 import com.example.amazon_item_design.dummy.DummyContent.DummyItem;
 
+import java.text.BreakIterator;
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
+
 public class MyAmazonProductRecyclerViewAdapter extends RecyclerView.Adapter<MyAmazonProductRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
-    private final OnListFragmentInteractionListener mListener;
+    private final List<AmazonProduct> mValues;
+    private Context ctx;
+    private int layout;
 
-    public MyAmazonProductRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
-        mValues = items;
-        mListener = listener;
+    public MyAmazonProductRecyclerViewAdapter(List<AmazonProduct> objects, Context ctx,int layout) {
+        mValues = objects;
+        this.ctx = ctx;
+        this.layout = layout;
     }
 
     @Override
@@ -37,20 +37,23 @@ public class MyAmazonProductRecyclerViewAdapter extends RecyclerView.Adapter<MyA
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.tvNombre.setText(holder.mItem.getNombre());
+        holder.tvSubtitulo.setText(holder.mItem.getSubtitulo());
+        holder.tvPrecio.setPrecio(holder.mItem.getPrecio());
+        holder.tvPrime.isPrime(holder.mItem.isPrime());
+        holder.tvFechaEntrega.setFechaEntrega(holder.mItem.getFechaEntrega());
+        holder.tvPrecioEnvio.setPrecioEnvio(holder.mItem.getPrecioEnvio());
+        holder.tvRating.setRating(holder.mItem.getRating());
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
-                }
-            }
-        });
-    }
+
+        Glide.with(ctx)
+                .load(holder.mItem.getUrlProducto())
+                .centerCrop()
+                .into(holder.ivFoto);
+
+
+
+
 
     @Override
     public int getItemCount() {
@@ -59,15 +62,29 @@ public class MyAmazonProductRecyclerViewAdapter extends RecyclerView.Adapter<MyA
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public DummyItem mItem;
+        public final TextView tvNombre;
+        public final TextView tvSubtitulo;
+        public final TextView tvPrecio;
+        public final TextView tvPrime;
+        public final TextView tvFechaEntrega;
+        public final TextView tvPrecioEnvio;
+        public final TextView tvRating;
+        public AmazonProduct mItem;
+
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            tvNombre = view.findViewById(R.id.txNombreProducto);
+            tvSubtitulo = view.findViewById(R.id.txSubtitulo);
+            tvPrecio = view.findViewById(R.id.txPrecio);
+            tvPrime = view.findViewById(R.id.txPrime);
+            tvFechaEntrega = view.findViewById(R.id.txFechaEntrega);
+            tvPrecioEnvio = view.findViewById(R.id.txPrecioEnvio);
+            tvRating = view.findViewById(R.id.ratingBar);
+
+
+
         }
 
         @Override
